@@ -116,7 +116,6 @@ for i in rec_dl_messy:
 
 
 #직원 수 - 빈 리스트로 채우기
-#프로젝트 경향 - 빈 리스트로 채우기
 for i in cpn_name:
     people.append('')
 
