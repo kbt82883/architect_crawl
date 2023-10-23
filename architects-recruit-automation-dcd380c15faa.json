@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "architects-recruit-automation",
+  "private_key_id": "dcd380c15faacf86ec5eab3b9ffb7098feb99b86",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC+CbCTUmxaH/Lu\n5Dbd/N5FFnWkN0WQnLXPgEsaQjj3gEFdyydOxQ2OGq5FHZZ1Hbj2YRsinJVjgKqv\n58oYepFExl4OTPVLvLQngsjKHa/v74XH6WdWeZaxh3al7TAGV5osaRFZvipB2fe/\nkDwzRgX8eCFqc3rugV9zZgKIJZj7dsj+oKNedJEEUBXF76Lupo2kVpd4QFwnFLuv\njlYg38QSis2HGuZArKkLLYZ1hcU6JiXzFsvyYlO6exBhJ2LX/u7FYLmpqDtvHWOI\nyfBkUD7iNrrK9SDY/cGDQepkiEa3Or8ovWGBA0YK3+g6KU7uYAbLPdCaKexQuH2F\nMkMaIdexAgMBAAECggEAS52VaflI7c96nX2nK0s7sefO5Ymsn28LlMYqnAcvnaOl\n3slAGcKksx+AqjWssWsjNr3Ky0nc01vWDuo+6uCSPvhjYnNSw1ERqgsLFAkeAW2g\nILyJhsoYoQkSt9EZ49wll3gzFC9rpwow30NoAMrjBONUAIR0rMRDk6pKZZv4NE4N\n0cIRDH8d6etphd/Gm8D6qhug23ppt6DTdVBWlwXCi8sRE1v9q6BgvBlMyTzWOeJu\nGEBRDWGvrNaMjbokviwwY82dSdr3ogreRcZJXDtha7ukYYAi2uthbQv7x4uy0eIx\nUkpZOVyL8ADsErRbvsEIuVT9SQ9wpVBwlW4vE8oFpQKBgQD3zKChuokl6cnjSsnV\noFqT0Exx18vpnP5qygerBFRYi3nofVSymAq3rSNmzo6eEdfJwRI/VKmsouGUJD33\nLxzpxmyvfYso/Vm4h55kqOk17cl9NH2P5ZMnKqKXSiMr7JOQkS387g7XSRnGzVO6\nuYLvl2+vnq1dlt5sDJu5oPOX0wKBgQDEU7QDqDfFh0PKRRoJT/1HL57MLCi58sz2\nQQ18wG/0wVCFPSp+J4wdrU1kMxkgFQJTufNqXgVVVxgfLdr5mgzJeZubSKY4wCOT\n6JKkuyZYBTuiPaqfETgAlj16v8TOyri+JHfJnUFTr5MPtX7/aGzT34xKGIc2QcI2\nt+QOuIoD6wKBgQC/+sMASZpzyxrkg063uRIzro9rK7sJdN4PMhKaxjHqn7SFEISM\nEQtMnlDtF16azEwYPQK8GgWSgGav9Rwk41VNMLOHioZD7XSTaE6owcxcQat22zHk\nSAKnt3pcJ83z+8efmzq72FubI0FbKjyST6NHqFWZBCBgf8A2idYkDLRsjQKBgQCK\nk5aF2k/7kj2sYVg+aIKbo6ZP8X+RuSspSsOtYdvkhCtE0ObUgy+opvHwnwzGE25A\nEQoa82CKW16Aa4qcEjuiXr8SPZZuiljShyAzPJKVIKR2IVb0zl+cMnAU25WcbYU3\nWWBgJCq/WjfQp8iLmXbvmmRYzLVr+8CNhQFpzqJEnwKBgB1jZ3fOoQ/NUrcy//CM\nZZnZ7SaThD4LcuLWb4c2b7UPPFdXMH8DHoljmhofHMkmW8R9pHZC28EK8EzZncZf\nepGXwVNJcWScgqfhnZNwexVpVyJpsqHjP+O1cNOwRFCtqFiXlu/z86JwLImzWzh5\nzogXBLckWGJu0FdUnYLxVdar\n-----END PRIVATE KEY-----\n",
+  "client_email": "archi-recruit@architects-recruit-automation.iam.gserviceaccount.com",
+  "client_id": "106447587399727653862",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/archi-recruit%40architects-recruit-automation.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
