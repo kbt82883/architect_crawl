@@ -87,19 +87,19 @@ for sentence in rec_full_text:
     if "신입" in sentence:
         rec_newcomer.append('o')
     else:
-        rec_newcomer.append('')
+        rec_newcomer.append('-')
 
 for sentence in rec_full_text:
     if sentence.count('경력') >= 2:
         rec_career.append('o')
     else:
-        rec_career.append('')
+        rec_career.append('-')
     
 for sentence in rec_full_text:
     if "인턴" in sentence:
         rec_intern.append('o')
     else:
-        rec_intern.append('')
+        rec_intern.append('-')
     
 #채용공고 마감기한 0월0일 or 충원시 형태로 변환
 for i in rec_dl_messy:
