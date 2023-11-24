@@ -31,12 +31,13 @@ cpn_url = [] #회사 url
 rep_name = [] #대표 이름
 recruit_career = [] #신입·경력·인턴 부분
 recruit_id = []#채용공고 글번호
+rec_main_text = [] #채용공고 본문
 
 #각 채용공고에 접속하여 회사 채용정보 추출
 def text_crawling(list, selector, elm):
     list.append(driver.find_element(selector, elm).text)
 
-page = 5 #크롤링 할 범위 마지막 페이지 입력
+page = 10 #크롤링 할 범위 마지막 페이지 입력
 for p in range(1,page+1): # 원하는 페이지까지 반복문
     driver.implicitly_wait(10)
     # for문 안에 page_bar를 넣어주어 매번 지정
@@ -58,11 +59,14 @@ for p in range(1,page+1): # 원하는 페이지까지 반복문
         #회사 주소
         text_crawling(cpn_add_messy, By.XPATH, '//*[@id="s_container"]/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/span')
         #채용공고 마감기한
-        text_crawling(rec_dl, By.XPATH, '//*[@id="s_container"]/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/span')
+        text_crawling(rec_dl_messy, By.XPATH, '//*[@id="s_container"]/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/span')
         #신입·경력·인턴 부분
         text_crawling(recruit_career, By.XPATH, '//*[@id="s_container"]/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div[2]/span')
         #직원 수
         text_crawling(people_messy, By.XPATH, '//*[@id="s_container"]/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div[2]/div[3]/div[1]/div[2]')
+        #채용공고 본문
+        text_crawling(rec_main_text, By.XPATH, '//*[@id="s_container"]/div[3]/div/div/div[2]/div/div[2]/div[1]/div/div[2]/div[10]/div/div[2]/div')
+        
 
         driver.implicitly_wait(10)
         driver.find_element(By.XPATH, '//*[@id="s_container"]/div[3]/div/div/div[2]/div/div[2]/div[2]/div[1]/button[1]').click()
@@ -102,12 +106,30 @@ for i in cpn_add_messy:
 
 #직원 수에서 명 제거
 for i in people_messy:
-    a = i.split()
-    people.append(a[0])
+    if i.startswith('0'):
+        people.append('-')
+    else:
+        a = i.split()
+        people.append(a[0])
 
 #채용공고 글번호로 채용공고 url 생성
 for i in recruit_id:
     recruit_url.append('https://www.kira.or.kr/jsp/main/03/02_01.jsp?jobId=BBS_00_GUIN&sc_gi_jobId=BBS_00_GUIN&mode=read&sc_gi_compSctcode=&sc_gi_careerType=&sc_gi_compLoccode=&sc_gi_bizType=&sc_gi_payType=&sc_gi_compNameL=&gi_itemId=' + str(i))
+
+#상세요강에 마감기한이 있으면 확인 필요!
+num = 0
+for i in rec_dl_messy:
+    if i.startswith('상시'):
+        rec_dl.append('상시 채용')
+    elif i.startswith('충원 시'):
+        if rec_main_text[num] in '기간' or rec_main_text[num] in '기한':
+            rec_dl.append('확인 필요!')
+        else:
+            rec_dl.append('충원 시')
+    else:
+        rec_dl.append('확인 필요!')
+    num = num + 1
+
 
 print(len(rec_newcomer))
 print(len(rec_career))

@@ -75,7 +75,9 @@ while len(rec_full_text) != len(rec_title):
 #회사 주소 00 00구 형태로 변환
 for i in cpn_add_messy:
     if i.startswith(' '):
-        cpn_add.append('확인 필요!')    
+        cpn_add.append('확인 필요!')
+    elif len(i.split()) < 2:
+        cpn_add.append('확인 필요!')
     else:
         a = i.split()
         cpn_add.append(a[1] + " " + a[2])
