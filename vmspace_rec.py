@@ -46,6 +46,9 @@ for value in recruit_url_messy:
 #url에 접속해서 회사 채용정보 추출
 def text_crawling(list, selector, elm):
     list.append(driver.find_element(selector, elm).text)
+
+# del recruit_url[7] 문제있는 채용공고 발견시 사용하기
+
 for recruit_crawl in recruit_url:
     driver.get(recruit_crawl)
     driver.implicitly_wait(10)

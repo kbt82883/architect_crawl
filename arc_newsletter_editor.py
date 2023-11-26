@@ -1,13 +1,13 @@
 #뉴스레터 생성시 작성해야 할 것
 #몇월 몇주차 인지
 month = '11'
-week = '4'
+week = '5'
 #언제까지의 채용공고 기준인지
-base_date = "23.11.19 까지의 채용공고 기준"
+base_date = "23.11.26 까지의 채용공고 기준"
 #신입,경력,인턴별로 새로운 채용공고가 몇개인지
-new_newcomer_number = 13
-new_career_number = 30
-new_intern_number = 4
+new_newcomer_number = 15
+new_career_number = 50
+new_intern_number = 1
 
 #구글시트에서 데이터 가져오기
 import gspread
@@ -22,7 +22,8 @@ new_dt_2 = wks.col_values(3) #신입_사무소 명
 new_dt_3 = wks.col_values(4) #신입_직원 수 
 new_dt_4 = wks.col_values(5) #신입_위치
 new_dt_5 = wks.col_values(6) #채용 링크
-new_dt_6 = wks.col_values(7) #홈페이지
+new_dt_6_messy = wks.col_values(7) #홈페이지(비정제)
+new_dt_6 = [] #홈페이지
 
 #경력 데이터
 car_dt_1 = wks.col_values(9) #경력_채용 마감일
@@ -31,7 +32,8 @@ car_dt_3 = wks.col_values(11) #경력_요구경력
 car_dt_4 = wks.col_values(12) #경력_직원 수
 car_dt_5 = wks.col_values(13) #경력_위치
 car_dt_6 = wks.col_values(14) #채용 링크
-car_dt_7 = wks.col_values(15) #홈페이지
+car_dt_7_messy = wks.col_values(15) #홈페이지(비정제)
+car_dt_7 = [] #홈페이지
 
 #인턴 데이터
 int_dt_1 = wks.col_values(17) #인턴_채용 마감일
@@ -39,13 +41,36 @@ int_dt_2 = wks.col_values(18) #인턴_사무소 명
 int_dt_3 = wks.col_values(19) #인턴_직원 수
 int_dt_4 = wks.col_values(20) #인턴_위치
 int_dt_5 = wks.col_values(21) #채용 링크
-int_dt_6 = wks.col_values(22) #홈페이지
+int_dt_6_messy = wks.col_values(22) #홈페이지(비정제)
+int_dt_6 = [] #홈페이지
 
+#회사 홈페이지에 http:// 붙이기
+#신입 홈페이지
+for i in new_dt_6_messy:
+    if len(i) > 3 and not(i.startswith('http')):
+        new_dt_6.append('http://' + i)
+    else:
+        new_dt_6.append(i)
+
+#경력 홈페이지
+for i in car_dt_7_messy:
+    if len(i) > 3 and not(i.startswith('http')):
+        car_dt_7.append('http://' + i)
+    else:
+        car_dt_7.append(i)
+
+#인턴 홈페이지
+for i in int_dt_6_messy:
+    if len(i) > 3 and not(i.startswith('http')):
+        int_dt_6.append('http://' + i)
+    else:
+        int_dt_6.append(i)
 
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.pagesizes import A4
+from reportlab.graphics.shapes import *
 
 #폰트
 pdfmetrics.registerFont(TTFont("나눔고딕a", "./../../fonts/NaverNanumSquareNeo/NanumSquareNeo/TTF/NanumSquareNeo-aLt.ttf"))
@@ -55,7 +80,7 @@ pdfmetrics.registerFont(TTFont("나눔고딕d", "./../../fonts/NaverNanumSquareN
 pdfmetrics.registerFont(TTFont("나눔고딕e", "./../../fonts/NaverNanumSquareNeo/NanumSquareNeo/TTF/NanumSquareNeo-eHv.ttf"))
 
 #캔버스 생성
-pdf = canvas.Canvas("[" + month + "월 " + week + "주차] picky 건축.pdf")
+pdf = canvas.Canvas("C:/Users/USER/Desktop/와이즈올 업무용/picky 뉴스레터 모음/뉴스레터 건축/[" + month + "월 " + week + "주차] picky 건축.pdf")
 
 #신입 채용정보 데이터 작성하기---------
 pdf.drawImage("뉴스레터 이미지 폴더/건축_신입.png", 0, 0, width=595, height=841)
@@ -78,6 +103,11 @@ for i in range(1,newcomer_number + 1):
     else:
         y = 708 - (22 * (i % 30))
 
+    if i <= new_newcomer_number:
+        pdf.setStrokeColor('#2C0AE4')
+        pdf.setFillColor('#2C0AE4')
+        pdf.circle(25, y+2.5, 2.5, stroke=1, fill=1)
+
     pdf.setFont("나눔고딕b", 9)
     pdf.setFillColor('#000000')
     pdf.drawString(32, y, new_dt_1[i])
@@ -88,8 +118,11 @@ for i in range(1,newcomer_number + 1):
     pdf.setFont("나눔고딕e", 9)
     pdf.drawString(472, y, "click !")
     link_rect = pdf.linkURL(new_dt_5[i], (472, y, 500, y+9), relative=1)
-    pdf.drawString(532, y, "click !")
-    link_rect = pdf.linkURL(new_dt_6[i], (532, y, 560, y+9), relative=1)
+    if new_dt_6[i].startswith('http'):
+        pdf.drawString(532, y, "click !")
+        link_rect = pdf.linkURL(new_dt_6[i], (532, y, 560, y+9), relative=1)
+    else:
+        pdf.drawString(532, y, "-")
 
     if i % 30 == 0:  # 30의 배수일 때 페이지 추가
         pdf.showPage()
@@ -128,6 +161,11 @@ for i in range(1,career_number + 1):
     else:
         y = 708 - (22 * (i % 30))
 
+    if i <= new_career_number:
+        pdf.setStrokeColor('#2C0AE4')
+        pdf.setFillColor('#2C0AE4')
+        pdf.circle(25, y+2.5, 2.5, stroke=1, fill=1)
+
     pdf.setFont("나눔고딕b", 9)
     pdf.setFillColor('#000000')
     pdf.drawString(32, y, car_dt_1[i])
@@ -139,8 +177,11 @@ for i in range(1,career_number + 1):
     pdf.setFont("나눔고딕e", 9)
     pdf.drawString(472, y, "click !")
     link_rect = pdf.linkURL(car_dt_6[i], (472, y, 500, y+9), relative=1)
-    pdf.drawString(532, y, "click !")
-    link_rect = pdf.linkURL(car_dt_7[i], (532, y, 560, y+9), relative=1)
+    if car_dt_7[i].startswith('http'):
+        pdf.drawString(532, y, "click !")
+        link_rect = pdf.linkURL(car_dt_7[i], (532, y, 560, y+9), relative=1)
+    else:
+        pdf.drawString(532, y, "-")
 
     if i % 30 == 0:  # 30의 배수일 때 페이지 추가
         pdf.showPage()
@@ -178,6 +219,11 @@ for i in range(1,intern_number + 1):
         y = 708 - (22 * 30)
     else:
         y = 708 - (22 * (i % 30))
+
+    if i <= new_intern_number:
+        pdf.setStrokeColor('#2C0AE4')
+        pdf.setFillColor('#2C0AE4')
+        pdf.circle(25, y+2.5, 2.5, stroke=1, fill=1)
 
     pdf.setFont("나눔고딕b", 9)
     pdf.setFillColor('#000000')
