@@ -252,4 +252,24 @@ for i in range(1,intern_number + 1):
         pdf.setFillColor('#9BA2B3')
         pdf.drawString(470, 780, base_date)
 
+pdf.showPage()
+
+#건축 포폴피드백 홍보
+pdf.drawImage("뉴스레터 이미지 폴더/건축_포폴피드백_홍보.png", 0, 0, width=595, height=841)
+
+#신청 하러 가기 Click !
+pdf.setFont("나눔고딕d", 24)
+pdf.setFillColor('#2C0AE4')
+
+width, height = A4
+
+str_width1 = pdf.stringWidth('신청 하러 가기')
+str_width2 = pdf.stringWidth('Click !')
+
+pdf.drawString((width // 2) - (str_width1 // 2), 570, '신청 하러 가기')
+pdf.drawString((width // 2) - (str_width2 // 2), 540, 'Click !')
+link_rect = pdf.linkURL('https://picky.kr/feedback-architecture', ((width // 2) - (str_width1 // 2), 570, (width // 2) - (str_width1 // 2) + str_width1, 594), relative=1)
+link_rect = pdf.linkURL('https://picky.kr/feedback-architecture', ((width // 2) - (str_width2 // 2), 540, (width // 2) - (str_width2 // 2) + str_width2, 564), relative=1)
+
+
 pdf.save()
