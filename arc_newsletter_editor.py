@@ -1,12 +1,12 @@
 #뉴스레터 생성시 작성해야 할 것
 #몇월 몇주차 인지
-month = '11'
-week = '5'
+month = '12'
+week = '1'
 #언제까지의 채용공고 기준인지
-base_date = "23.11.26 까지의 채용공고 기준"
+base_date = "23.12.03 까지의 채용공고 기준"
 #신입,경력,인턴별로 새로운 채용공고가 몇개인지
-new_newcomer_number = 15
-new_career_number = 50
+new_newcomer_number = 17
+new_career_number = 43
 new_intern_number = 1
 
 #구글시트에서 데이터 가져오기
@@ -14,7 +14,7 @@ import gspread
 
 gc = gspread.service_account('architects-recruit-automation-dcd380c15faa.json')
 sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/1HsA4HH5KptEeEUz6MRTHxRMJcAEU7H9_0GO3gMXiEXE/edit?usp=sharing")
-wks = sh.worksheet("figma 연동")
+wks = sh.worksheet("main")
 
 #신입 데이터
 new_dt_1 = wks.col_values(2) #신입_채용 마감일
