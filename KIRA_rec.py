@@ -131,6 +131,7 @@ for i in rec_dl_messy:
     num = num + 1
 
 
+print('리스트 개수입니다')
 print(len(rec_newcomer))
 print(len(rec_career))
 print(len(rec_intern))
@@ -139,7 +140,6 @@ print(len(cpn_name))
 print(len(people))
 print(len(cpn_add))
 print(len(recruit_url))
-
 
 
 #스프레드 시트에 작성----------------------------

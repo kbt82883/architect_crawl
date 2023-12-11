@@ -124,6 +124,20 @@ for i in rec_dl_messy:
 for i in cpn_name:
     people.append('')
 
+
+print('리스트 개수입니다')
+print(len(rec_newcomer))
+print(len(rec_career))
+print(len(rec_intern))
+print(len(rec_dl))
+print(len(cpn_name))
+print(len(people))
+print(len(cpn_add))
+print(len(recruit_url))
+print(len(cpn_url))
+print(len(rep_name))
+
+
 #스프레드 시트에 작성----------------------------
 import gspread
 from pandas import DataFrame
