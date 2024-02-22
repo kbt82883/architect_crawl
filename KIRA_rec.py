@@ -147,7 +147,7 @@ import gspread
 from pandas import DataFrame
 
 # json 파일이 위치한 경로를 값으로 줘야 합니다.
-json_file_path = "architects-recruit-automation-dcd380c15faa.json"
+json_file_path = "C:/kbtCoding/picky_newsletter/architect_crawl/architects-recruit-automation-dcd380c15faa.json"
 gc = gspread.service_account(json_file_path)
 spreadsheet_url = "https://docs.google.com/spreadsheets/d/1HsA4HH5KptEeEUz6MRTHxRMJcAEU7H9_0GO3gMXiEXE/edit?usp=sharing"
 doc = gc.open_by_url(spreadsheet_url)

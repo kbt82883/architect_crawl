@@ -53,7 +53,7 @@ for recruit_crawl in recruit_url:
     driver.get(recruit_crawl)
     driver.implicitly_wait(10)
     #회사 이름
-    text_crawling(cpn_name, By.CSS_SELECTOR, "div.left.col-6.col-md-auto.pl-0-xs > h2")
+    text_crawling(cpn_name, By.XPATH, "/html/body/div[6]/div[1]/section[1]/div/div/div/div/div[2]/h2")
     #대표 이름
     text_crawling(rep_name, By.XPATH, "/html/body/div[6]/div[1]/section[2]/div/div[1]/div[2]/div[2]/span[1]")
     #회사 url
@@ -79,7 +79,7 @@ while len(rec_full_text) != len(rec_title):
 for i in cpn_add_messy:
     if i.startswith(' '):
         cpn_add.append('확인 필요!')
-    elif len(i.split()) < 2:
+    elif len(i.split()) < 3:
         cpn_add.append('확인 필요!')
     else:
         a = i.split()
@@ -143,7 +143,8 @@ import gspread
 from pandas import DataFrame
 
 # json 파일이 위치한 경로를 값으로 줘야 합니다.
-json_file_path = "architects-recruit-automation-dcd380c15faa.json"
+# json_file_path = "architects-recruit-automation-dcd380c15faa.json"
+json_file_path = "C:/kbtCoding/picky_newsletter/architect_crawl/architects-recruit-automation-dcd380c15faa.json"
 gc = gspread.service_account(json_file_path)
 spreadsheet_url = "https://docs.google.com/spreadsheets/d/1HsA4HH5KptEeEUz6MRTHxRMJcAEU7H9_0GO3gMXiEXE/edit?usp=sharing"
 doc = gc.open_by_url(spreadsheet_url)

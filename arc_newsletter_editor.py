@@ -1,18 +1,19 @@
 #뉴스레터 생성시 작성해야 할 것
 #몇월 몇주차 인지
-month = '12'
-week = '2'
+year = '24'
+month = '2'
+week = '3'
 #언제까지의 채용공고 기준인지
-base_date = "23.12.10 까지의 채용공고 기준"
+base_date = "23.02.18 까지의 채용공고 기준"
 #신입,경력,인턴별로 새로운 채용공고가 몇개인지
-new_newcomer_number = 20
-new_career_number = 60
-new_intern_number = 4
+new_newcomer_number = 0
+new_career_number = 0
+new_intern_number = 0
 
 #구글시트에서 데이터 가져오기
 import gspread
 
-gc = gspread.service_account('architects-recruit-automation-dcd380c15faa.json')
+gc = gspread.service_account('C:/kbtCoding/picky_newsletter/architect_crawl/architects-recruit-automation-dcd380c15faa.json')
 sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/1HsA4HH5KptEeEUz6MRTHxRMJcAEU7H9_0GO3gMXiEXE/edit?usp=sharing")
 wks = sh.worksheet("main")
 
@@ -73,14 +74,14 @@ from reportlab.lib.pagesizes import A4
 from reportlab.graphics.shapes import *
 
 #폰트
-pdfmetrics.registerFont(TTFont("나눔고딕a", "./../../fonts/NaverNanumSquareNeo/NanumSquareNeo/TTF/NanumSquareNeo-aLt.ttf"))
-pdfmetrics.registerFont(TTFont("나눔고딕b", "./../../fonts/NaverNanumSquareNeo/NanumSquareNeo/TTF/NanumSquareNeo-bRg.ttf"))
-pdfmetrics.registerFont(TTFont("나눔고딕c", "./../../fonts/NaverNanumSquareNeo/NanumSquareNeo/TTF/NanumSquareNeo-cBd.ttf"))
-pdfmetrics.registerFont(TTFont("나눔고딕d", "./../../fonts/NaverNanumSquareNeo/NanumSquareNeo/TTF/NanumSquareNeo-dEb.ttf"))
-pdfmetrics.registerFont(TTFont("나눔고딕e", "./../../fonts/NaverNanumSquareNeo/NanumSquareNeo/TTF/NanumSquareNeo-eHv.ttf"))
+pdfmetrics.registerFont(TTFont("나눔고딕a", "C:/kbtCoding/fonts/NaverNanumSquareNeo/NanumSquareNeo/TTF/NanumSquareNeo-aLt.ttf"))
+pdfmetrics.registerFont(TTFont("나눔고딕b", "C:/kbtCoding/fonts/NaverNanumSquareNeo/NanumSquareNeo/TTF/NanumSquareNeo-bRg.ttf"))
+pdfmetrics.registerFont(TTFont("나눔고딕c", "C:/kbtCoding/fonts/NaverNanumSquareNeo/NanumSquareNeo/TTF/NanumSquareNeo-cBd.ttf"))
+pdfmetrics.registerFont(TTFont("나눔고딕d", "C:/kbtCoding/fonts/NaverNanumSquareNeo/NanumSquareNeo/TTF/NanumSquareNeo-dEb.ttf"))
+pdfmetrics.registerFont(TTFont("나눔고딕e", "C:/kbtCoding/fonts/NaverNanumSquareNeo/NanumSquareNeo/TTF/NanumSquareNeo-eHv.ttf"))
 
 #캔버스 생성
-pdf = canvas.Canvas("C:/Users/USER/Desktop/와이즈올 업무용/picky 뉴스레터 모음/뉴스레터 건축/" + month + "월/[" + month + "월 " + week + "주차] picky 건축.pdf")
+pdf = canvas.Canvas("C:/Users/USER/Desktop/와이즈올 업무용/picky 뉴스레터 모음/뉴스레터 건축/" + year + "년 " + month + "월/[" + month + "월 " + week + "주차] picky 건축.pdf")
 
 #신입 페이지 생성 함수
 def draw_newcomer_page():
@@ -101,10 +102,10 @@ def draw_newcomer_page():
     pdf.setFillColor('#9BA2B3')
     pdf.drawString(30, 714, "채용 마감일")
     pdf.drawString(110, 714, "사무소 명")
-    pdf.drawString(310, 714, "직원 수")
-    pdf.drawString(370, 714, "위치")
-    pdf.drawString(480, 714, "채용 링크")
-    pdf.drawString(530, 714, "홈페이지")
+    pdf.drawString(340, 714, "직원 수")
+    pdf.drawString(400, 714, "위치")
+    pdf.drawString(520, 714, "채용 링크")
+    # pdf.drawString(530, 714, "홈페이지")
 
 #경력 페이지 생성 함수
 def draw_career_page():
@@ -124,12 +125,12 @@ def draw_career_page():
     pdf.setFont("나눔고딕d", 10)
     pdf.setFillColor('#9BA2B3')
     pdf.drawString(30, 714, "채용 마감일")
-    pdf.drawString(100, 714, "사무소 명")
-    pdf.drawString(290, 714, "요구 경력")
+    pdf.drawString(110, 714, "사무소 명")
+    # pdf.drawString(290, 714, "요구 경력")
     pdf.drawString(340, 714, "직원 수")
-    pdf.drawString(380, 714, "위치")
-    pdf.drawString(480, 714, "채용 링크")
-    pdf.drawString(530, 714, "홈페이지")
+    pdf.drawString(400, 714, "위치")
+    pdf.drawString(520, 714, "채용 링크")
+    # pdf.drawString(530, 714, "홈페이지")
 
 #인턴 페이지 생성 함수
 def draw_intern_page():
@@ -149,11 +150,11 @@ def draw_intern_page():
     pdf.setFont("나눔고딕d", 10)
     pdf.setFillColor('#9BA2B3')
     pdf.drawString(30, 714, "채용 마감일")
-    pdf.drawString(100, 714, "사무소 명")
-    pdf.drawString(310, 714, "직원 수")
-    pdf.drawString(370, 714, "위치")
-    pdf.drawString(480, 714, "채용 링크")
-    pdf.drawString(530, 714, "홈페이지")
+    pdf.drawString(110, 714, "사무소 명")
+    pdf.drawString(340, 714, "직원 수")
+    pdf.drawString(400, 714, "위치")
+    pdf.drawString(520, 714, "채용 링크")
+    # pdf.drawString(530, 714, "홈페이지")
 
 #신입 채용정보 데이터 작성하기---------
 draw_newcomer_page()
@@ -175,17 +176,17 @@ for i in range(1,newcomer_number + 1):
     pdf.setFillColor('#000000')
     pdf.drawString(30, y, new_dt_1[i])
     pdf.drawString(110, y, new_dt_2[i])
-    pdf.drawString(310, y, new_dt_3[i])
-    pdf.drawString(370, y, new_dt_4[i])
+    pdf.drawString(340, y, new_dt_3[i])
+    pdf.drawString(400, y, new_dt_4[i])
 
     pdf.setFont("나눔고딕e", 9)
-    pdf.drawString(480, y, "click !")
-    link_rect = pdf.linkURL(new_dt_5[i], (480, y, 510, y+9), relative=1)
-    if new_dt_6[i].startswith('http'):
-        pdf.drawString(530, y, "click !")
-        link_rect = pdf.linkURL(new_dt_6[i], (530, y, 560, y+9), relative=1)
-    else:
-        pdf.drawString(530, y, "-")
+    pdf.drawString(520, y, "click !")
+    link_rect = pdf.linkURL(new_dt_5[i], (520, y, 540, y+9), relative=1)
+    # if new_dt_6[i].startswith('http'):
+    #     pdf.drawString(530, y, "click !")
+    #     link_rect = pdf.linkURL(new_dt_6[i], (530, y, 560, y+9), relative=1)
+    # else:
+    #     pdf.drawString(530, y, "-")
 
     if i % 30 == 0:  # 30의 배수일 때 페이지 추가
         pdf.showPage()
@@ -212,19 +213,19 @@ for i in range(1,career_number + 1):
     pdf.setFont("나눔고딕b", 9)
     pdf.setFillColor('#000000')
     pdf.drawString(30, y, car_dt_1[i])
-    pdf.drawString(100, y, car_dt_2[i])
-    pdf.drawString(290, y, car_dt_3[i])
+    pdf.drawString(110, y, car_dt_2[i])
+    # pdf.drawString(290, y, car_dt_3[i])
     pdf.drawString(340, y, car_dt_4[i])
-    pdf.drawString(380, y, car_dt_5[i])
+    pdf.drawString(400, y, car_dt_5[i])
 
     pdf.setFont("나눔고딕e", 9)
-    pdf.drawString(480, y, "click !")
-    link_rect = pdf.linkURL(car_dt_6[i], (480, y, 510, y+9), relative=1)
-    if car_dt_7[i].startswith('http'):
-        pdf.drawString(530, y, "click !")
-        link_rect = pdf.linkURL(car_dt_7[i], (530, y, 560, y+9), relative=1)
-    else:
-        pdf.drawString(530, y, "-")
+    pdf.drawString(520, y, "click !")
+    link_rect = pdf.linkURL(car_dt_6[i], (520, y, 550, y+9), relative=1)
+    # if car_dt_7[i].startswith('http'):
+    #     pdf.drawString(530, y, "click !")
+    #     link_rect = pdf.linkURL(car_dt_7[i], (530, y, 560, y+9), relative=1)
+    # else:
+    #     pdf.drawString(530, y, "-")
 
     if i % 30 == 0:  # 30의 배수일 때 페이지 추가
         pdf.showPage()
@@ -252,17 +253,17 @@ for i in range(1,intern_number + 1):
     pdf.setFillColor('#000000')
     pdf.drawString(30, y, int_dt_1[i])
     pdf.drawString(110, y, int_dt_2[i])
-    pdf.drawString(310, y, int_dt_3[i])
-    pdf.drawString(370, y, int_dt_4[i])
+    pdf.drawString(340, y, int_dt_3[i])
+    pdf.drawString(400, y, int_dt_4[i])
 
     pdf.setFont("나눔고딕e", 9)
-    pdf.drawString(480, y, "click !")
-    link_rect = pdf.linkURL(int_dt_5[i], (480, y, 510, y+9), relative=1)
-    if int_dt_6[i].startswith('http'):
-        pdf.drawString(530, y, "click !")
-        link_rect = pdf.linkURL(int_dt_6[i], (530, y, 560, y+9), relative=1)
-    else:
-        pdf.drawString(530, y, "-")
+    pdf.drawString(520, y, "click !")
+    link_rect = pdf.linkURL(int_dt_5[i], (520, y, 550, y+9), relative=1)
+    # if int_dt_6[i].startswith('http'):
+    #     pdf.drawString(530, y, "click !")
+    #     link_rect = pdf.linkURL(int_dt_6[i], (530, y, 560, y+9), relative=1)
+    # else:
+    #     pdf.drawString(530, y, "-")
 
     if i % 30 == 0:  # 30의 배수일 때 페이지 추가
         pdf.showPage()
