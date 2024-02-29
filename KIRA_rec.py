@@ -37,7 +37,7 @@ rec_main_text = [] #채용공고 본문
 def text_crawling(list, selector, elm):
     list.append(driver.find_element(selector, elm).text)
 
-page = 10 #크롤링 할 범위 마지막 페이지 입력
+page = 5 #크롤링 할 범위 마지막 페이지 입력
 for p in range(1,page+1): # 원하는 페이지까지 반복문
     driver.implicitly_wait(10)
     # for문 안에 page_bar를 넣어주어 매번 지정
